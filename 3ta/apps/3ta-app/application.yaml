@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 3ta-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  # Runs after cluster registration
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KBrookfield/argocd.git
+    path: 3ta/apps/3ta-app
+    targetRevision: main
+  destination:
+    server: vks-01-admin@vks-01 # This will work after registration
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

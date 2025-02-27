@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 3ta-vm
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"  # Ensures this runs first
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KBrookfield/argocd.git
+    path: 3ta/apps/3ta-vm
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc  # Deploying to management cluster
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
