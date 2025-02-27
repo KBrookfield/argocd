@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: register
-        image: ""  # Runs in-cluster without pulling an image
+        image: "quay.io/argoproj/argocd@sha256:a0ebfa7d419a1c78babc80fc77de093751d8a5fabffcaf3f7e81a4d55a23cc0d"  # Runs in-cluster without pulling an image
         command: ["/bin/sh", "-c"]
         args:
           - |
