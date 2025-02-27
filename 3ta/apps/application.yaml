@@ -1,14 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 3ta-vks
+  name: 3ta-parent
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/KBrookfield/argocd'
     targetRevision: main
-    path: 3ta/apps/3ta-vks
+    path: 3ta/apps    
+    directory:
+      recurse: true   
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
@@ -16,5 +18,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  # Runs in parallel with 3ta-vm
-  syncWave: -1

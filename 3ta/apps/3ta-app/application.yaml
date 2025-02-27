@@ -3,18 +3,20 @@ kind: Application
 metadata:
   name: 3ta-app
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"  # Runs after cluster registration
 spec:
   project: default
   source:
-    repoURL: https://github.com/KBrookfield/argocd.git
-    path: 3ta/apps/3ta-app
+    repoURL: 'https://github.com/KBrookfield/argocd'
     targetRevision: main
+    path: 3ta/apps/3ta-app
   destination:
-    server: vks-01-admin@vks-01 # This will work after registration
+    # This is critical: you want to deploy to the newly registered cluster
+    # Use the cluster context name that Argo CD sees after registration
+    name: 'vks-01-admin@vks-01'
     namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+  # Deploy after the cluster is registered
+  syncWave: 2

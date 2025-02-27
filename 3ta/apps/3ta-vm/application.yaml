@@ -3,18 +3,18 @@ kind: Application
 metadata:
   name: 3ta-vm
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"  # Ensures this runs first
 spec:
   project: default
   source:
-    repoURL: https://github.com/KBrookfield/argocd.git
-    path: 3ta/apps/3ta-vm
+    repoURL: 'https://github.com/KBrookfield/argocd'
     targetRevision: main
+    path: 3ta/apps/3ta-vm
   destination:
-    server: https://kubernetes.default.svc  # Deploying to management cluster
+    server: 'https://kubernetes.default.svc'
     namespace: argocd
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+  # Runs in parallel with 3ta-vks
+  syncWave: -1

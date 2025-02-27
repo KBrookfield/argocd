@@ -6,6 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   template:
     spec:
@@ -25,7 +26,4 @@ spec:
 
             echo "Registering vks-01 in ArgoCD with context: $CONTEXT"
             argocd cluster add $CONTEXT --kubeconfig /tmp/vks-01-kubeconfig
-
-            echo "Triggering 3ta-app deployment..."
-            kubectl annotate app 3ta-app argocd.argoproj.io/sync-wave="1" -n argocd
       restartPolicy: Never
