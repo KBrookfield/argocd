@@ -8,7 +8,9 @@ spec:
   source:
     repoURL: 'https://github.com/KBrookfield/argocd'
     targetRevision: main
-    path: 3ta/apps/3ta-app/manifests
+    path: 3ta/apps/3ta-app
+    directory:
+      recurse: true
   destination:
     # This is critical: you want to deploy to the newly registered cluster
     # Use the cluster context name that Argo CD sees after registration

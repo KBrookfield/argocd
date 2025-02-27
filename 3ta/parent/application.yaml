@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/KBrookfield/argocd'
     targetRevision: main
-    path: 3ta/apps    
+    path: 3ta/child-apps    
     directory:
       recurse: true   
   destination:
